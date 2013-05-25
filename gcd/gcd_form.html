@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Euclid's Algorithm{% endblock %}
+
+{% block content %}
+<h2>Greatest Common Denominator</h2>
+<p>This form takes two whole numbers and finds the greatest number that 
+divides both of them evenly. It uses 
+<a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">
+    Euclid's algorithm</a> to do this.
+</p>
+<script>
+    document.write("<p>My First JavaScript</p>");
+</script>
+{% endblock %}
+
+{% block codeform %}
+<form action="." method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}
+
+{% block code %}
+def gcd(x, y):
+    if x < y:
+        return gcd(y, x)
+    elif x % y == 0: 
+        return y
+    elif y == 0: 
+        return x
+    else:   
+        return gcd(y, x % y)
+{% endblock %}

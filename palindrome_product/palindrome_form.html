@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Palindrome Products{% endblock %}
+
+{% block content %}
+<h2>Greatest Palindrome Product</h2>
+<p>This form takes two number and finds the largest palindrome number that 
+can be created from the range of those numbers. For example <b>X = 100</b> and
+<b>Y = 1001</b> will find the largest palindrome product of a three digit 
+number. X must be the smaller number (but just because I'm too lazy to change 
+the code).
+</p>
+{% endblock %}
+
+{% block codeform %}
+<form action="." method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}
+
+{% block code %}
+"""There's probably a better way then generating the entire list"""
+def pp(bot, top):                                                                      
+    """return the largest palindrone product"""                                
+    x = [i for i in range(bot, top)]     #the range of numbers to multiply        
+                                                                               
+    y = itertools.product(x, repeat=2)   #tuple of every pair                  
+    z = [i[0] * i[1] for i in y]         #product of every pair                
+                                                                               
+    for i in sorted(set(z)):             #sort the products                    
+        if str(i) == str(i)[::-1]:       #item is a palindrome                 
+            pal = i
+        return i
+{% endblock %}
